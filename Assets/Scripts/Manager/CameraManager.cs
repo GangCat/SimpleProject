@@ -5,19 +5,29 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject mousePosIndiGo = null;
+    [SerializeField]
+    private GameObject explosionIndiGo = null;
 
     private Camera cam = null;
     private Transform myTr = null;
     private Coroutine mousePointIndiCor = null;
+    private Coroutine explosionIndiCor = null;
+
+    private WaitForSeconds explosionDelay = null;
+
+    private Vector3 curMouseWorldPos = Vector3.zero;
 
     public void Init()
     {
         cam = GetComponent<Camera>();
         myTr = GetComponent<Transform>();
+
+        explosionDelay = new WaitForSeconds(1f);
         mousePointIndiCor = StartCoroutine(nameof(mousePointIndiCoroutine));
+        explosionIndiCor = StartCoroutine(nameof(explosionIndiCoroutine));
     }
 
-    public float getZPos()
+    public float GetZPos()
     {
         return myTr.position.z;
     }
@@ -31,12 +41,20 @@ public class CameraManager : MonoBehaviour
     {
         while(true)
         {
-            var newPos = ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log("mousePos " + Input.mousePosition);
-            Debug.Log("worldPos " + newPos);
-            newPos.z -= getZPos();
-            mousePosIndiGo.GetComponent<Transform>().position = newPos;
+            curMouseWorldPos = ScreenToWorldPoint(Input.mousePosition);
+            curMouseWorldPos.z -= GetZPos();
+            mousePosIndiGo.GetComponent<Transform>().position = curMouseWorldPos;
             yield return null;
+        }
+    }
+
+    private IEnumerator explosionIndiCoroutine()
+    {
+        while(true)
+        {
+            yield return explosionDelay;
+
+            explosionIndiGo.GetComponent<Transform>().position = curMouseWorldPos;
         }
     }
 
