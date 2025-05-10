@@ -2,17 +2,23 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    private GameObject mousePosIndiGo = null;
+
+    [SerializeField]
+    private CameraManager cam;
+
+    public void Init()
     {
         
-
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        var newPos = cam.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log("mousePos " + Input.mousePosition);
+        Debug.Log("worldPos " + newPos);
+        newPos.z -= cam.getZPos();
+        mousePosIndiGo.GetComponent<Transform>().position = newPos;
     }
 }
