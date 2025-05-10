@@ -789,6 +789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab481f9ef2addb34ea76bfc0b5da3170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePosIndiGo: {fileID: 2072930747}
+  cam: {fileID: 330585548}
 --- !u!1 &2072930747
 GameObject:
   m_ObjectHideFlags: 0

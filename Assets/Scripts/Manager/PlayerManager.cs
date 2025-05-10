@@ -15,10 +15,5 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        var newPos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log("mousePos " + Input.mousePosition);
-        Debug.Log("worldPos " + newPos);
-        newPos.z -= cam.getZPos();
-        mousePosIndiGo.GetComponent<Transform>().position = newPos;
     }
 }

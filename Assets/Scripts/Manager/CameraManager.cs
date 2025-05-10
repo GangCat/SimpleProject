@@ -14,7 +14,7 @@ public class CameraManager : MonoBehaviour
     {
         cam = GetComponent<Camera>();
         myTr = GetComponent<Transform>();
-        //mousePointIndiCor = StartCoroutine(nameof(mousePointIndiCoroutine));
+        mousePointIndiCor = StartCoroutine(nameof(mousePointIndiCoroutine));
     }
 
     public float getZPos()
@@ -24,7 +24,7 @@ public class CameraManager : MonoBehaviour
 
     public Vector3 ScreenToWorldPoint(Vector3 _mousePos)
     {
-        return cam.ScreenToViewportPoint(_mousePos);
+        return cam.ScreenToWorldPoint(_mousePos);
     }
 
     private IEnumerator mousePointIndiCoroutine()
