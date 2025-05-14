@@ -24,11 +24,7 @@ public class TempEnemy : MonoBehaviour, IDamagable
         transform.position = _pos;
         isAlive = true;
         StartCoroutine(nameof(MoveToCastleCoroutine));
-        //transform.forward = -transform.position;
-        // z만 회전시켜서 캐슬을 바라봐야함.
-        // 그러면 
-        Debug.Log((-transform.position).normalized);
-        transform.up = (-transform.position).normalized;
+        transform.up = (-transform.position).normalized; // 성 바라보도록함
     }
 
     public void Damaged(float dmg)

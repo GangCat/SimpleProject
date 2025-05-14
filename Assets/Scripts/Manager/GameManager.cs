@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Start!");
 
+        Application.targetFrameRate = 60;
+
         InitManagers();
     }
 
@@ -20,7 +22,7 @@ public class GameManager : MonoBehaviour
         camMng.Init();
 
         PlayerManager playerMng = FindAnyObjectByType<PlayerManager>();
-        playerMng.Init();
+        playerMng.Init(camMng);
 
         EnemyManager enemyMng = FindAnyObjectByType<EnemyManager>();
         enemyMng.Init(poolMng);
