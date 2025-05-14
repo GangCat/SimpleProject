@@ -226,6 +226,10 @@ PolygonCollider2D:
     - - {x: 0, y: 0.5773587}
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
+    - - {x: 0.21, y: 0.61}
+      - {x: -0.21, y: 0.61}
+      - {x: -0.21, y: 0.24}
+      - {x: 0.21, y: 0.23}
   m_UseDelaunayMesh: 0
 --- !u!114 &7220810530533529148
 MonoBehaviour:
@@ -242,4 +246,4 @@ MonoBehaviour:
   maxHp: 1
   curHp: 1
   damage: 5
-  moveSpeed: 1
+  moveSpeed: 0.4

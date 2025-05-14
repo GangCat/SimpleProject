@@ -3,11 +3,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour, IMouseWorldPosProvider
 {
-    [SerializeField]
-    private Transform mousePosIndiTr = null;
-
     private Camera cam = null;
-    private Coroutine mousePointIndiCor = null;
 
     public Vector2 MouseWorldPos
     {
@@ -19,20 +15,12 @@ public class CameraManager : MonoBehaviour, IMouseWorldPosProvider
 
     public void Init()
     {
-        cam = Camera.main;
-        mousePointIndiCor = StartCoroutine(MousePointIndiCoroutine());
+        cam = GetComponentInChildren<Camera>();
     }
 
-
-
-    private IEnumerator MousePointIndiCoroutine()
+    private void OnDrawGizmos()
     {
-        while (true)
-        {
-            mousePosIndiTr.position = MouseWorldPos;
-
-            yield return null;
-        }
+        if(Application.isPlaying)
+            GizmosUtils.DrawMousePosGizmo(Color.blue, MouseWorldPos);
     }
-
 }
