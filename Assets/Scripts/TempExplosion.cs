@@ -7,8 +7,8 @@ public class TempExplosion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var enemy = collision.GetComponent<TempEnemy>();
-        enemy.Damaged(dmg);
+        var damagable = collision.GetComponent<IDamagable>();
+        damagable?.Damaged(dmg);
         Debug.Log("Trigger");
     }
 }

@@ -2,18 +2,21 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class TempEnemy : MonoBehaviour
+public class TempEnemy : MonoBehaviour, IDamagable
 {
     [SerializeField]
     private float maxHp = 1f;
     [SerializeField]
     private float curHp = 1f;
 
+    [SerializeField]
+    private float damage = 5f;
+
+    [SerializeField]
+    private float moveSpeed = 1f;
+
     private ObjectPool pool = null;
-
     private bool isAlive = false;
-
-    private Vector2 castlePos = Vector2.zero;
 
     public void Init(ObjectPool _pool, Vector2 _pos)
     {
@@ -21,6 +24,11 @@ public class TempEnemy : MonoBehaviour
         transform.position = _pos;
         isAlive = true;
         StartCoroutine(nameof(MoveToCastleCoroutine));
+        //transform.forward = -transform.position;
+        // z만 회전시켜서 캐슬을 바라봐야함.
+        // 그러면 
+        Debug.Log((-transform.position).normalized);
+        transform.up = (-transform.position).normalized;
     }
 
     public void Damaged(float dmg)
@@ -36,10 +44,9 @@ public class TempEnemy : MonoBehaviour
     private IEnumerator MoveToCastleCoroutine()
     {
         // 방향은 항상 0,0 방향이기 때문에 자기 포지션의 역임
-        Vector2 dir = -transform.position;
         while(isAlive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, 1f * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, moveSpeed * Time.deltaTime);
 
             yield return null;
         }
@@ -47,6 +54,7 @@ public class TempEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.SetActive(false);
+        var damagable = collision.GetComponent<IDamagable>();
+        damagable?.Damaged(damage);
     }
 }

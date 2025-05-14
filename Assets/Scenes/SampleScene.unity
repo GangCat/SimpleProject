@@ -178,13 +178,13 @@ GameObject:
   - component: {fileID: 341147339}
   - component: {fileID: 341147341}
   - component: {fileID: 341147340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TempExplosionIndi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &341147335
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 511646573}
   - component: {fileID: 511646572}
   - component: {fileID: 511646574}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TempCastle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
