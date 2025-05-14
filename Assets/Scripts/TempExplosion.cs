@@ -5,28 +5,24 @@ using UnityEngine;
 /// 폭발의 경우 처음 나왔을때만 공격하고 바로 다음 프레임에 사라질거임
 /// 그리고 대신 이펙트는 남아있어야함.
 /// </summary>
-public class TempExplosion : MonoBehaviour, IMouseAttack
+public class TempExplosion : MouseAttackBaseClass
 {
     [SerializeField]
     private float dmg = 1f;
     [SerializeField]
-    private float coolTime = 2f;
-    [SerializeField]
     private float radius = 3f;
-
-    private WaitForSeconds cooltimeDelay = null;
+    [SerializeField]
+    private Color gizmoColor = Color.black;
 
     private int enemyLayerMask = -1;
 
-    public bool CanAttack { get; private set; } = true;
-
-    public void Init()
+    public override void Init()
     {
-        cooltimeDelay = new WaitForSeconds(coolTime);
+        base.Init();
         enemyLayerMask = LayerMask.GetMask("Enemy");
     }
-
-    public void Attack(Vector2 _mouseWorldPos)
+    
+    protected override void AttackCycle(Vector2 _mouseWorldPos)
     {
         transform.position = _mouseWorldPos;
 
@@ -36,20 +32,11 @@ public class TempExplosion : MonoBehaviour, IMouseAttack
             var damagable = hit.collider.GetComponent<IDamagable>();
             damagable?.Damaged(dmg);
         }
-
-        StartCoroutine(nameof(CooltimeCoroutine));
-    }
-
-    private IEnumerator CooltimeCoroutine()
-    {
-        CanAttack = false;
-        yield return cooltimeDelay;
-        CanAttack = true;
     }
 
     private void OnDrawGizmos()
     {
-        GizmosUtils.DrawCircleGizmo(Color.red, transform.position, radius);
+        GizmosUtils.DrawCircleGizmo(gizmoColor, transform.position, radius);
     }
 
 }
