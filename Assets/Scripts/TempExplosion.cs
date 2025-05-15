@@ -5,7 +5,7 @@ using UnityEngine;
 /// 폭발의 경우 처음 나왔을때만 공격하고 바로 다음 프레임에 사라질거임
 /// 그리고 대신 이펙트는 남아있어야함.
 /// </summary>
-public class TempExplosion : MouseAttackBaseClass
+public class TempExplosion : MonoBehaviour, IMouseAttack
 {
     [SerializeField]
     private float dmg = 1f;
@@ -13,20 +13,39 @@ public class TempExplosion : MouseAttackBaseClass
     private float radius = 3f;
     [SerializeField]
     private Color gizmoColor = Color.black;
+    [SerializeField]
+    private float coolTime = 2f;
 
-    private int enemyLayerMask = -1;
+    private WaitForSeconds cooltimeDelay = null;
 
-    public override void Init()
+    public bool CanAttack { get; private set; } = true;
+
+    private readonly int ENEMY_LAYER_MASK = LayerMask.GetMask("Enemy");
+
+    public void Init()
     {
-        base.Init();
-        enemyLayerMask = LayerMask.GetMask("Enemy");
+        cooltimeDelay = new WaitForSeconds(coolTime);
     }
-    
-    protected override void AttackCycle(Vector2 _mouseWorldPos)
+
+    public void Attack(Vector2 _mouseWorldPos)
+    {
+        AttackCycle(_mouseWorldPos);
+
+        StartCoroutine(nameof(CooltimeCoroutine));
+    }
+
+    private IEnumerator CooltimeCoroutine()
+    {
+        CanAttack = false;
+        yield return cooltimeDelay;
+        CanAttack = true;
+    }
+
+    private void AttackCycle(Vector2 _mouseWorldPos)
     {
         transform.position = _mouseWorldPos;
 
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0f, enemyLayerMask);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0f, ENEMY_LAYER_MASK);
         foreach (var hit in hits)
         {
             var damagable = hit.collider.GetComponent<IDamagable>();

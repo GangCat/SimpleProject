@@ -20,6 +20,8 @@ public class PlayerManager : MonoBehaviour
 
     private IMouseAttack[] mouseAttackArr = null;
 
+    private bool isDevMode = false;
+
     // TODO: 모든 기술을 사용하는 걸 하나의 코루틴으로 해야함
     // 그러니까 뭔 뜻이냐면 플레이어가 사용하는 모든 공격, 마우스로 하는 모든 공격은 동일한 인터페이스로
     // 그 인터페이스에서 뭐 Attack이라던가 하는 함수 호출해서 공격하게 하고
@@ -33,9 +35,10 @@ public class PlayerManager : MonoBehaviour
     // 그럼 호출하는 쪽에서는 공격쿨타임 되었나? 되었다면 공격
     // 이거만 하면 됨
 
-    public void Init(IMouseWorldPosProvider _mouseWorldPosProvider)
+    public void Init(IMouseWorldPosProvider _mouseWorldPosProvider, bool _isDevMode)
     {
         mouseWorldPosProvider = _mouseWorldPosProvider;
+        isDevMode = _isDevMode;
         mouseAttackArr = new IMouseAttack[(int)EMouseAttackTypes.LENGTH];
         mouseAttackArr[(int)EMouseAttackTypes.EXPLOSION] = explosion;
 
