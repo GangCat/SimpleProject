@@ -10,7 +10,11 @@ public class TempExplosion : MonoBehaviour, IMouseAttack
     [SerializeField]
     private float dmg = 1f;
     [SerializeField]
-    private float radius = 3f;
+    private int level = 1;
+    [SerializeField]
+    private int maxLevel = 1;
+    [SerializeField]
+    private float radius = 1f;
     [SerializeField]
     private Color gizmoColor = Color.black;
     [SerializeField]
@@ -19,12 +23,24 @@ public class TempExplosion : MonoBehaviour, IMouseAttack
     private WaitForSeconds cooltimeDelay = null;
 
     public bool CanAttack { get; private set; } = true;
+    public bool CanLevelUp { get; private set; } = true;
 
-    private readonly int ENEMY_LAYER_MASK = LayerMask.GetMask("Enemy");
+    private int EnemyLayerMask = -1;
 
     public void Init()
     {
+        EnemyLayerMask = LayerMask.GetMask("Enemy");
         cooltimeDelay = new WaitForSeconds(coolTime);
+    }
+
+    public void LevelUp(int _upLevel)
+    {
+        level += _upLevel;
+        if (level >= maxLevel)
+        {
+            level = maxLevel;
+            CanLevelUp = false;
+        }
     }
 
     public void Attack(Vector2 _mouseWorldPos)
@@ -45,7 +61,7 @@ public class TempExplosion : MonoBehaviour, IMouseAttack
     {
         transform.position = _mouseWorldPos;
 
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0f, ENEMY_LAYER_MASK);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, 0f, EnemyLayerMask);
         foreach (var hit in hits)
         {
             var damagable = hit.collider.GetComponent<IDamagable>();

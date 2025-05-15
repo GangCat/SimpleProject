@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4c8610ed8a02c64eadb6f846b40e821
+    m_Address: Assets/Scripts/ScriptableObject/AttackLevelStatus.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 916fb0ad3ba1e174099fa3df4fefd1ed, type: 2}
   m_SchemaSet:
