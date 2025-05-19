@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempSpreadMissile : MonoBehaviour, IMouseAttack
+public class TempSpreadMissile : MonoBehaviour, IMouseActiveAttack
 {
     [SerializeField]
-    private AttackLevelStatus missileLevelStatusSO = null;
+    private SpreadMissileLevelStatus missileLevelStatusSO = null;
 
     [SerializeField]
     private int level = 0;
@@ -47,6 +47,9 @@ public class TempSpreadMissile : MonoBehaviour, IMouseAttack
     {
         for(int i = 0; i < missileCnt; ++i)
         {
+            // TODO: 지금은 완전 랜덤인데
+            // 이거말고 가장 가까운 적들을 이 미사일 개수만큼 구한 다음에
+            // 그 방향으로 하나씩 보내버리자.
             var launchDir = -SpawnUtils.GetRandomPositionOnCircleEdge();
             missileArr[i].Launch(_mouseWorldPos, launchDir.normalized);
         }

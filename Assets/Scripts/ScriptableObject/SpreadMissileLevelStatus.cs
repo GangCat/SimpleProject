@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AttackLevelStatus", menuName = "Scriptable Objects/AttackLevelStatus")]
-public class AttackLevelStatus : ScriptableObject
+public class SpreadMissileLevelStatus : ScriptableObject
 {
     [SerializeField]
     private List<MissileData> missileLevelStatus = new();

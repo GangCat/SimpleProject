@@ -11,8 +11,11 @@ public class PlayerManager : MonoBehaviour
     private TempExplosion explosion = null;
     [SerializeField]
     private TempSpreadMissile spreadMissile = null;
+    [SerializeField]
+    private TempCircleDot circleDot = null;
 
-    private IMouseAttack[] mouseAttackArr = null;
+    private IMouseActiveAttack[] mouseActiveAttackArr = null;
+    private IMousePassiveAttack[] mousePassiveAttackArr = null;
 
     private IMouseWorldPosProvider mouseWorldPosProvider = null;
 
@@ -22,13 +25,17 @@ public class PlayerManager : MonoBehaviour
     {
         mouseWorldPosProvider = _mouseWorldPosProvider;
         devMode = _devMode;
-        mouseAttackArr = new IMouseAttack[(int)EMouseAttackTypes.LENGTH];
-        mouseAttackArr[(int)EMouseAttackTypes.EXPLOSION] = explosion;
-        mouseAttackArr[(int)EMouseAttackTypes.SPREAD_MISSILE] = spreadMissile;
+        mouseActiveAttackArr = new IMouseActiveAttack[(int)EMouseActiveAttackType.LENGTH];
+        mouseActiveAttackArr[(int)EMouseActiveAttackType.EXPLOSION] = explosion;
+        mouseActiveAttackArr[(int)EMouseActiveAttackType.SPREAD_MISSILE] = spreadMissile;
+
+        mousePassiveAttackArr = new IMousePassiveAttack[(int)EMousePassiveAttackType.LENGTH];
+        mousePassiveAttackArr[(int)EMousePassiveAttackType.CIRCLE_DOT] = circleDot;
 
         castle.Init();
         explosion?.Init();
         spreadMissile?.Init();
+        circleDot?.Init(mouseWorldPosProvider);
         StartCoroutine(nameof(AttackCoroutine));
     }
 
@@ -36,9 +43,9 @@ public class PlayerManager : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i < mouseAttackArr.Length; i++)
+            for (int i = 0; i < mouseActiveAttackArr.Length; i++)
             {
-                IMouseAttack attack = mouseAttackArr[i];
+                IMouseActiveAttack attack = mouseActiveAttackArr[i];
                 if (attack == null)
                     continue;
 

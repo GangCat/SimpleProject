@@ -5,7 +5,7 @@ using UnityEngine;
 /// 폭발의 경우 처음 나왔을때만 공격하고 바로 다음 프레임에 사라질거임
 /// 그리고 대신 이펙트는 남아있어야함.
 /// </summary>
-public class TempExplosion : MonoBehaviour, IMouseAttack
+public class TempExplosion : MonoBehaviour, IMouseActiveAttack
 {
     [SerializeField]
     private float dmg = 1f;
@@ -19,6 +19,10 @@ public class TempExplosion : MonoBehaviour, IMouseAttack
     private Color gizmoColor = Color.black;
     [SerializeField]
     private float coolTime = 2f;
+
+    [SerializeField]
+    private ExplosionLevelStatus explosionLevelStatusSO = null;
+
 
     private WaitForSeconds cooltimeDelay = null;
 
@@ -36,11 +40,21 @@ public class TempExplosion : MonoBehaviour, IMouseAttack
     public void LevelUp(int _upLevel)
     {
         level += _upLevel;
+
         if (level >= maxLevel)
         {
             level = maxLevel;
             CanLevelUp = false;
         }
+
+        SetStatusByLevel();
+    }
+
+
+    private void SetStatusByLevel()
+    {
+        var status = explosionLevelStatusSO[level];
+        dmg = status.dmg;
     }
 
     public void Attack(Vector2 _mouseWorldPos)
@@ -73,5 +87,4 @@ public class TempExplosion : MonoBehaviour, IMouseAttack
     {
         GizmosUtils.DrawCircleGizmo(gizmoColor, transform.position, radius);
     }
-
 }

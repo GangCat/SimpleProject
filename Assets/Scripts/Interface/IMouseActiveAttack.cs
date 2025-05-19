@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IMouseAttack
+public interface IMouseActiveAttack
 {
     public bool CanAttack { get; }
 
