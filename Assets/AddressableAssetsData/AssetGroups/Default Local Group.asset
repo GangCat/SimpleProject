@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 626a573b7cf588746905283b9ddf78d0
   m_SerializeEntries:
+  - m_GUID: 221f100f935c04a4581f926f10c933f1
+    m_Address: Prefabs/DamageText.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 66ccf84fb8bf65a449cba9755c94dcc6
     m_Address: Assets/Scripts/ScriptableObject/ExplosionLevelStatus.asset
     m_ReadOnly: 0

@@ -9,6 +9,26 @@ public class ObjectPoolManager :MonoBehaviour
 
     Dictionary<GameObject, string> pathToObject = new();
 
+    private ObjectPoolManager() { }
+    private static ObjectPoolManager instance;
+    public static ObjectPoolManager Instance
+    {
+        get
+        {
+            if(instance == null)
+                instance = FindAnyObjectByType<ObjectPoolManager>();
+            if (instance == null)
+                Debug.LogError("ObjectPoolManager 인스턴스를 찾을 수 없습니다!");
+
+            return instance;
+        }
+
+        private set
+        {
+            instance = value;
+        }
+    }
+
 
     public ObjectPool PrepareObjects(string path,int increaseCnt=5)
     {

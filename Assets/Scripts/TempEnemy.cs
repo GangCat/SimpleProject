@@ -17,12 +17,14 @@ public class TempEnemy : MonoBehaviour, IDamagable
 
     private ObjectPool pool = null;
     private bool isAlive = false;
+    private ICommand showDamageTextCommand = null;
 
-    public void Init(ObjectPool _pool, Vector2 _pos)
+    public void Init(ObjectPool _pool, Vector2 _pos, ICommand _showDamageTextCommand)
     {
         pool = _pool;
         transform.position = _pos;
         isAlive = true;
+        showDamageTextCommand = _showDamageTextCommand;
         StartCoroutine(nameof(MoveToCastleCoroutine));
         transform.up = (-transform.position).normalized; // 성 바라보도록함
     }
@@ -30,7 +32,8 @@ public class TempEnemy : MonoBehaviour, IDamagable
     public void Damaged(float dmg)
     {
         curHp -= dmg;
-        if(curHp <= 0)
+        showDamageTextCommand?.Execute((Vector2)transform.position);
+        if (curHp <= 0)
         {
             isAlive = false;
             pool.DeactivatePoolItem(gameObject);

@@ -6,17 +6,18 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private float enemySpawnDelay = 2f;
 
-    private ObjectPoolManager poolMng = null;
-
     private ObjectPool enemyPool = null;
+
+    private ICommand showDamageTextCommand;
 
     [SerializeField]
     private string enemyPrefabPath = "Prefabs/TempEnemy.prefab";
 
-    public void Init(ObjectPoolManager _poolMng)
+    public void Init(ICommand _showDamageTextCommand)
     {
-        poolMng = _poolMng;
+        var poolMng = ObjectPoolManager.Instance;
         enemyPool = poolMng.PrepareObjects(enemyPrefabPath);
+        showDamageTextCommand = _showDamageTextCommand;
         StartCoroutine(nameof(SpawnEnemyCoroutine));
     }
 
@@ -25,7 +26,7 @@ public class EnemyManager : MonoBehaviour
         while(true)
         {
             var enemyGo = enemyPool.ActivatePoolItem(); 
-            enemyGo.GetComponent<TempEnemy>().Init(enemyPool, SpawnUtils.GetRandomPointOutsideCamera2D());
+            enemyGo.GetComponent<TempEnemy>().Init(enemyPool, SpawnUtils.GetRandomPointOutsideCamera2D(), showDamageTextCommand);
 
             yield return new WaitForSeconds(enemySpawnDelay);
         }

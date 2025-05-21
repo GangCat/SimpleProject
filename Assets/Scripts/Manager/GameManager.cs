@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,26 +6,37 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool devMode;
 
+    ObjectPoolManager poolMng = null;
+    CameraManager camMng = null;
+    PlayerManager playerMng = null;
+    EnemyManager enemyMng = null;
+    CanvasManager canvasMng = null;
+
     private void Start()
     {
         Debug.Log("Game Start!");
         Application.targetFrameRate = 60;
 
-        InitManagers();
+        Findmanagers();
+
+        var command = new CommandShowDamageText(canvasMng.GetCanvasDamageText);
+
+        InitManagers(command);
     }
 
-    private void InitManagers()
+    private void Findmanagers()
     {
-        ObjectPoolManager poolMng = FindAnyObjectByType<ObjectPoolManager>();
+        camMng = FindAnyObjectByType<CameraManager>();
+        playerMng = FindAnyObjectByType<PlayerManager>();
+        enemyMng = FindAnyObjectByType<EnemyManager>();
+        canvasMng = FindAnyObjectByType<CanvasManager>();
+    }
 
-        CameraManager camMng = FindAnyObjectByType<CameraManager>();
+    private void InitManagers(ICommand _cmd)
+    {
         camMng.Init();
-
-        PlayerManager playerMng = FindAnyObjectByType<PlayerManager>();
         playerMng.Init(camMng, devMode);
-
-        EnemyManager enemyMng = FindAnyObjectByType<EnemyManager>();
-        enemyMng.Init(poolMng);
-
+        enemyMng.Init(_cmd);
+        canvasMng.Init();
     }
 }

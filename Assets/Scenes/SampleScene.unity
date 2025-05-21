@@ -1019,6 +1019,7 @@ GameObject:
   - component: {fileID: 778446513}
   - component: {fileID: 778446512}
   - component: {fileID: 778446511}
+  - component: {fileID: 778446514}
   m_Layer: 5
   m_Name: CanvasDamageText
   m_TagString: Untagged
@@ -1103,11 +1104,24 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &778446514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778446509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41754b8f62b037148ba4909d3bb937af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPath: Prefabs/DamageText.prefab
 --- !u!1 &808499180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,6 +2258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522868759}
+  - component: {fileID: 1522868760}
   m_Layer: 0
   m_Name: CanvasManager
   m_TagString: Untagged
@@ -2268,6 +2283,19 @@ Transform:
   - {fileID: 623405587}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1522868760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522868758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a1267ced0387947bcea73d1750c90f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasDamageText: {fileID: 778446514}
 --- !u!1 &1577890733
 GameObject:
   m_ObjectHideFlags: 0

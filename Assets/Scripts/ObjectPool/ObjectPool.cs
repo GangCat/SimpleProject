@@ -40,7 +40,7 @@ public class ObjectPool
         {
             GameObject poolGo = GameObject.Instantiate(poolObject);
             poolGo.SetActive(false);
-            poolGo.transform.parent = parentTr;
+            poolGo.transform.SetParent(parentTr);
 
             poolQueueDisable.Enqueue(poolGo);
         }
