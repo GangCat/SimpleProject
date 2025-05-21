@@ -30,9 +30,9 @@ public class TempSpreadMissile : MonoBehaviour, IMouseActiveAttack
 
     private TempMissile[] missileArr = null;
 
-    
 
-    public void Init()
+
+    public void Init(IMouseWorldPosProvider _provider)
     {
         SetStatusByLevel();
         cooltimeDelay = new WaitForSeconds(coolTime);
@@ -64,9 +64,9 @@ public class TempSpreadMissile : MonoBehaviour, IMouseActiveAttack
         CanAttack = true;
     }
 
-    public void LevelUp(int _upLevel)
+    public void LevelUp()
     {
-        level += _upLevel;
+        ++level;
 
         if(level >= maxLevel)
         {

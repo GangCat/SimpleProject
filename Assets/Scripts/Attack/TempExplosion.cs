@@ -31,7 +31,7 @@ public class TempExplosion : MonoBehaviour, IMouseActiveAttack
 
     private int EnemyLayerMask = -1;
 
-    public void Init()
+    public void Init(IMouseWorldPosProvider _provider)
     {
         EnemyLayerMask = LayerMask.GetMask("Enemy");
 
@@ -39,9 +39,9 @@ public class TempExplosion : MonoBehaviour, IMouseActiveAttack
         cooltimeDelay = new WaitForSeconds(coolTime);
     }
 
-    public void LevelUp(int _upLevel)
+    public void LevelUp()
     {
-        level += _upLevel;
+        ++level;
 
         if (level >= maxLevel)
         {

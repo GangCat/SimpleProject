@@ -26,16 +26,19 @@ public class PlayerManager : MonoBehaviour
         mouseWorldPosProvider = _mouseWorldPosProvider;
         devMode = _devMode;
         mouseActiveAttackArr = new IMouseActiveAttack[(int)EMouseActiveAttackType.LENGTH];
-        mouseActiveAttackArr[(int)EMouseActiveAttackType.EXPLOSION] = explosion;
-        mouseActiveAttackArr[(int)EMouseActiveAttackType.SPREAD_MISSILE] = spreadMissile;
+        mouseActiveAttackArr[(int)EMouseActiveAttackType.EXPLOSION] = explosion.gameObject.activeSelf ? explosion : null;
+        mouseActiveAttackArr[(int)EMouseActiveAttackType.SPREAD_MISSILE] = spreadMissile.gameObject.activeSelf ? spreadMissile : null;
 
         mousePassiveAttackArr = new IMousePassiveAttack[(int)EMousePassiveAttackType.LENGTH];
         mousePassiveAttackArr[(int)EMousePassiveAttackType.CIRCLE_DOT] = circleDot;
 
+        foreach (var attack in mouseActiveAttackArr)
+            attack?.Init(_mouseWorldPosProvider);
+        foreach (var attack in mousePassiveAttackArr)
+            attack?.Init(_mouseWorldPosProvider);
+
         castle.Init();
-        explosion?.Init();
-        spreadMissile?.Init();
-        circleDot?.Init(mouseWorldPosProvider);
+
         StartCoroutine(nameof(AttackCoroutine));
     }
 

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12e81fb22b94aa45afbddd341547251, type: 3}
+  m_Name: CircleDotLevelStatus
+  m_EditorClassIdentifier: 
+  missileLevelStatus:
+  - dmg: 0.2
+    radius: 0.5
+  - dmg: 0.3
+    radius: 0.6
+  - dmg: 0.4
+    radius: 0.7
+  - dmg: 0.5
+    radius: 0.8
+  - dmg: 0.6
+    radius: 0.9
+  - dmg: 0.7
+    radius: 1
+  - dmg: 0.8
+    radius: 1.2
