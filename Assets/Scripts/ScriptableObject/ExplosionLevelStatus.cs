@@ -15,7 +15,6 @@ public class ExplosionLevelStatus : ScriptableObject
 public struct ExplosionData
 {
     public float dmg;
-    public float Cooltime;
+    public float cooltime;
     public float radius;
-    public float MissileDmg;
 }

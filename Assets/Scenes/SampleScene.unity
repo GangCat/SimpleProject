@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &136544491
 Transform:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &341147335
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1188,7 +1188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &892158912
 Transform:
   m_ObjectHideFlags: 0
@@ -1928,8 +1928,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 892158913}
-        m_TargetAssemblyTypeName: TempSpreadMissile, Assembly-CSharp
+      - m_Target: {fileID: 341147339}
+        m_TargetAssemblyTypeName: TempExplosion, Assembly-CSharp
         m_MethodName: LevelUp
         m_Mode: 3
         m_Arguments:
@@ -2694,8 +2694,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castle: {fileID: 511646576}
-  explosion: {fileID: 0}
-  spreadMissile: {fileID: 892158913}
+  explosion: {fileID: 341147339}
+  spreadMissile: {fileID: 0}
   circleDot: {fileID: 0}
 --- !u!1 &2072930747
 GameObject:

@@ -12,4 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2043ac527605d1446bdbec9ef24e1ba0, type: 3}
   m_Name: ExplosionLevelStatus
   m_EditorClassIdentifier: 
-  explosionLevelStatus: []
+  explosionLevelStatus:
+  - dmg: 3
+    cooltime: 6
+    radius: 1
+  - dmg: 3.5
+    cooltime: 5.8
+    radius: 1
+  - dmg: 4
+    cooltime: 5.6
+    radius: 1.2
+  - dmg: 4.5
+    cooltime: 5.4
+    radius: 1.2
+  - dmg: 5
+    cooltime: 5.2
+    radius: 1.4
+  - dmg: 5.5
+    cooltime: 5
+    radius: 1.4
+  - dmg: 6
+    cooltime: 4.8
+    radius: 1.6
+  - dmg: 7
+    cooltime: 4.6
+    radius: 1.6

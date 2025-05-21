@@ -23,7 +23,7 @@ public class TempExplosion : MonoBehaviour, IMouseActiveAttack
     [SerializeField]
     private ExplosionLevelStatus explosionLevelStatusSO = null;
 
-
+    private Coroutine cooltimeCoroutine = null;
     private WaitForSeconds cooltimeDelay = null;
 
     public bool CanAttack { get; private set; } = true;
@@ -34,6 +34,8 @@ public class TempExplosion : MonoBehaviour, IMouseActiveAttack
     public void Init()
     {
         EnemyLayerMask = LayerMask.GetMask("Enemy");
+
+        SetStatusByLevel();
         cooltimeDelay = new WaitForSeconds(coolTime);
     }
 
@@ -55,13 +57,20 @@ public class TempExplosion : MonoBehaviour, IMouseActiveAttack
     {
         var status = explosionLevelStatusSO[level];
         dmg = status.dmg;
+        radius = status.radius;
+        coolTime = status.cooltime;
+
+        // 이거 바꿔도 이번 루프때 사용하고 있었다면 그 루프때는 쿨타임 갱신 안된 채로 돌아감
+        // 근데 큰 문제 없을듯?
+        // 해봤자 0.몇초 차이라 ㅇㅇ
+        cooltimeDelay = new WaitForSeconds(coolTime);
     }
 
     public void Attack(Vector2 _mouseWorldPos)
     {
         AttackCycle(_mouseWorldPos);
 
-        StartCoroutine(nameof(CooltimeCoroutine));
+        cooltimeCoroutine = StartCoroutine(nameof(CooltimeCoroutine));
     }
 
     private IEnumerator CooltimeCoroutine()

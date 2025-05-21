@@ -12,4 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73080ee1df5f34e4c9b95dd97dec15a3, type: 3}
   m_Name: SpreadMissileLevelStatus
   m_EditorClassIdentifier: 
-  missileLevelStatus: []
+  missileLevelStatus:
+  - MissileCnt: 3
+    Cooltime: 4
+    MissileSpeed: 1
+    MissileDmg: 1
+  - MissileCnt: 3
+    Cooltime: 3.6
+    MissileSpeed: 1.1
+    MissileDmg: 1.2
+  - MissileCnt: 4
+    Cooltime: 3.2
+    MissileSpeed: 1.2
+    MissileDmg: 1.4
+  - MissileCnt: 4
+    Cooltime: 2.8
+    MissileSpeed: 1.3
+    MissileDmg: 1.6
+  - MissileCnt: 5
+    Cooltime: 2.4
+    MissileSpeed: 1.4
+    MissileDmg: 1.8
+  - MissileCnt: 6
+    Cooltime: 2
+    MissileSpeed: 1.5
+    MissileDmg: 2
